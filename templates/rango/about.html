@@ -1,0 +1,32 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title_block %}Sobre o Rango {% endblock title_block %}
+
+{% block active_about %}active{% endblock active_about %}
+
+{% block active %} active {% endblock active %}
+
+{% block body_block %}
+    <h1 class="ui header">
+        <div class="content">
+            Rango
+            <div class="sub header">{% trans "Esta é a página sobre o Rango." %}</div>
+        </div>
+    </h1>
+    <div class="ui black segment">
+        <p>Este site foi desenvolvido por Lucas Santana <i class="ui anchor icon"></i> durante o estágio na empresa Arkmeds
+            <a href="http://bsi.araquari.ifc.edu.br/" target="_blank">Bacharelando em sistemas de informação
+        <p>O projeto do <a href="http://www.tangowithdjango.com/" target="_blank">Tango With Django</a>, intitulado
+            Rango,
+            foi uma proposta para o aprendizado do mesmo
+        <p>Entre as principais ferramentas envolvidas neste projeto, estiveram:
+        <ol>
+            <li><a href="https://docs.djangoproject.com/pt-br/1.10/releases/1.2/" target="_blank">Django </a></li>
+            <li><a href="https://github.com" target="_blank">GitHub</a></li>
+        </ol>
+        </p>
+        <img class="ui huge centered image" src="{% static "images/rango.jpeg" %}" alt="Picture of Rango"/>
+    </div>
+{% endblock body_block %}
