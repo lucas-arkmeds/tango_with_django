@@ -1,7 +1,7 @@
 from datetime import datetime
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.shortcuts import redirect
 from rango.models import Category
 from rango.models import Page
 from django.http import HttpResponse,HttpResponseRedirect
@@ -38,6 +38,8 @@ def category(request, id_number):
         pass
         # Go render the response and return it to the client.
     return render(request, 'rango/category.html', context_dict)
+
+    pages = Page.objects.filter(category=category).order_by('-views')
 
 
 def index(request):
@@ -263,3 +265,36 @@ def user_logout(request):
 
 def about(request):
     return render(request,'rango/about.html')
+
+
+
+
+"""
+def search(request):
+    result_list = []
+
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+
+        if query:
+            # Execute nossa função Bing para obter a lista de resultados!
+
+            result_list = run_query(query)
+
+    return render(request, 'rango/search.html', {'result_list': result_list})
+"""
+def track_url(request):
+    page_id = None
+    url = '/rango/'
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            page_id = request.GET['page_id']
+            try:
+                page = Page.objects.get(id=page_id)
+                page.views = page.views + 1
+                page.save()
+                url = page.url
+            except:
+                pass
+
+    return redirect(url)
